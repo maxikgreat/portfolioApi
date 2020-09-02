@@ -4,8 +4,8 @@
   "description": "Api server for portfolio app",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/index.ts",
-    "start": "node build/server/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/index.ts",
+    "start": "cross-env NODE_ENV=production node build/server/index.js",
     "build": "tsc -p ."
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/maxikgreat/portfolioApi#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.2"
   },
@@ -27,7 +28,6 @@
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.6.2",
     "cross-env": "^7.0.2",
-    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
