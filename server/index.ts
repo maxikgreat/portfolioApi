@@ -4,9 +4,12 @@ import mongoose from 'mongoose';
 
 import workRoute from './routes/work.route';
 
-const result = dotenv.config();
 
-if (result.error) throw result.error;
+if (process.env.NODE_ENV === 'development') {
+  const result = dotenv.config();
+  if (result.error) throw result.error;
+}
+
 
 const port = process.env.PORT || 3001;
 const server = express();
