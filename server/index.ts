@@ -22,7 +22,7 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/api/v1', workRoute);
+server.use('/api/v1/works', workRoute);
 
 (async () => {
   try {
