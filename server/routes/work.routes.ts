@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import Work from '../../models/Work';
+import { checkJwt } from './../middleware/auth.middleware';
 
 const router = Router();
 
@@ -13,11 +14,11 @@ router.get('/', async (_, res) => {
   }
 });
 
-router.post('/new', async (req, res) => {
+router.post('/new', checkJwt, async (req, res) => {
   const workData = req.body;
-  console.log('workdata', workData);
   try {
     const newWork = new Work(workData);
+    // const userId = 'google-oauth2|100859891013293195235';
     await newWork.save();
     return res.json('Record added...');
   } catch (e) {

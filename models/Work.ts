@@ -10,6 +10,7 @@ const schema = new Schema({
   endDate: { type: Date },
   descriptionPoints: { type: Array, of: String, required: true },
   createdAt: { type: Date, default: Date.now() },
+  userId: { type: String, required: true, default: 'google-oauth2|100859891013293195235' }
 });
 
 export default model('Work', schema);
