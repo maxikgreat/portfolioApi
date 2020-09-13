@@ -35,7 +35,7 @@ server.use('/api/v1/works', workRoute);
       useCreateIndex: true,
     });
 
-    server.get('', (req, res) => {
+    server.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../index.html'));
     });
 
