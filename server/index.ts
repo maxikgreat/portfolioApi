@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import fs from 'fs';
 
-import workRoute from './routes/work.route';
+import workRoute from './routes/work.routes';
 
 if (process.env.NODE_ENV === 'development') {
   const result = dotenv.config();
