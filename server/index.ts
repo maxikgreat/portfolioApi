@@ -10,12 +10,15 @@ if (process.env.NODE_ENV === 'development') {
   const result = dotenv.config();
   if (result.error) throw result.error;
 } else { // in build folder
-  fs.copyFileSync(
+  fs.copyFileSync( // copy html
     path.join(__dirname, '../../index.html'),
     path.join(__dirname, '../index.html'),
   );
+  fs.copyFileSync( // copy favicon
+    path.join(__dirname, '../../favicon.ico'),
+    path.join(__dirname, '../favicon.ico'),
+  );
 }
-
 
 const port = process.env.PORT || 3001;
 const server = express();
