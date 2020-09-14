@@ -20,7 +20,7 @@ router.post('/new', checkJwt, async (req, res) => {
     const newWork = new Work(workData);
     // const userId = 'google-oauth2|100859891013293195235';
     await newWork.save();
-    return res.json('Record added...');
+    return res.json(newWork);
   } catch (e) {
     console.log(e);
     return res.status(422).send(e.message);
