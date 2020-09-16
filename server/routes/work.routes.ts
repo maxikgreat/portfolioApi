@@ -14,6 +14,16 @@ router.get('/', async (_, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const work = await Work.findById(req.params.id);
+    if (work) return res.json(work); 
+    return res.status(404).send('No found work with this id');
+  } catch (e) {
+    return res.status(422).send(e.message);
+  }
+});
+
 router.post('/new', checkJwt, async (req, res) => {
   const workData = req.body;
   try {
