@@ -1,7 +1,8 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
 
 import Work from '../../models/Work';
 import { checkJwt } from './../middleware/auth.middleware';
+import { RequestHandler } from 'express-jwt';
 
 const router = Router();
 
@@ -24,7 +25,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// interface RequestWithAuth0 extends Request, RequestHandler {}
+
 router.post('/new', checkJwt, async (req, res) => {
+  console.log(req);
   const workData = req.body;
   try {
     const newWork = new Work(workData);
@@ -32,9 +36,12 @@ router.post('/new', checkJwt, async (req, res) => {
     await newWork.save();
     return res.json(newWork);
   } catch (e) {
-    console.log(e);
     return res.status(422).send(e.message);
   }
 });
+
+// router.patch('/:id', async (req, res) => {
+
+// });
 
 export default router;
