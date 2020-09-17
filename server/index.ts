@@ -33,9 +33,10 @@ server.use('/api/v1/works', workRoute);
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     });
 
-    server.get('*', (req, res) => {
+    server.get('*', (_, res) => {
       res.sendFile(path.join(__dirname, '../index.html'));
     });
 
