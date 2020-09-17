@@ -28,8 +28,8 @@ router.get('/:id', async (req, res) => {
 // interface RequestWithAuth0 extends Request, RequestHandler {}
 
 router.post('/new', checkJwt, async (req, res) => {
-  console.log(req);
   const workData = req.body;
+  workData.userId = req.user.sub;
   try {
     const newWork = new Work(workData);
     // const userId = 'google-oauth2|100859891013293195235';
@@ -40,8 +40,15 @@ router.post('/new', checkJwt, async (req, res) => {
   }
 });
 
-// router.patch('/:id', async (req, res) => {
-
-// });
+router.patch('/:id', checkJwt, async (req, res) => {
+  const { body,  params: { id }} = req;
+  try {
+    const updatedWork = await Work.findOneAndUpdate({ _id: id }, body, { new: true, runValidators: true });
+    if (updatedWork) return res.json(updatedWork);
+    return res.status(404).send('No found work with this id');
+  } catch (e) {
+    return res.status(422).send(e.message);
+  }
+});
 
 export default router;
