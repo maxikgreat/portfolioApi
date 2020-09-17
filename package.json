@@ -1,6 +1,6 @@
 {
   "name": "portfolio-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Api server for portfolio app",
   "main": "index.js",
   "scripts": {
