@@ -40,7 +40,10 @@ router.post('/new', checkJwt, async (req, res) => {
 router.patch('/:id', checkJwt, async (req, res) => {
   const { body,  params: { id }} = req;
   try {
-    const updatedWork = await Work.findOneAndUpdate({ _id: id }, body, { new: true, runValidators: true });
+    const updatedWork = await Work.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
     if (updatedWork) return res.json(updatedWork);
     return res.status(404).send('No found work with this id');
   } catch (e) {
