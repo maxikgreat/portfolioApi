@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
 import Work from '../../models/Work';
-import { checkJwt } from './../middleware/auth.middleware';
+import { checkJwt, checkRole } from './../middleware/auth.middleware';
+import { Role } from '../../types';
 
 const router = Router();
 
@@ -50,7 +51,7 @@ router.patch('/:id', checkJwt, async (req, res) => {
   }
 });
 
-router.delete('/:id', checkJwt, async (req, res) => {
+router.delete('/:id', checkJwt, checkRole(Role.admin), async (req, res) => {
   const { params: { id }} = req;
   try {
     const deletedWork = await Work.findByIdAndDelete(id);
