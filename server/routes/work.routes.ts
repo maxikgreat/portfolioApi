@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/new', checkJwt, async (req, res) => {
+router.post('/new', checkJwt, checkRole(Role.admin), async (req, res) => {
   const workData = req.body;
   workData.userId = req.user.sub;
   try {
@@ -37,7 +37,7 @@ router.post('/new', checkJwt, async (req, res) => {
   }
 });
 
-router.patch('/:id', checkJwt, async (req, res) => {
+router.patch('/:id', checkJwt, checkRole(Role.admin), async (req, res) => {
   const { body,  params: { id }} = req;
   try {
     const updatedWork = await Work.findByIdAndUpdate(id, body, {
