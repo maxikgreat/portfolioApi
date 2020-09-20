@@ -29,7 +29,6 @@ router.post('/new', checkJwt, async (req, res) => {
   workData.userId = req.user.sub;
   try {
     const newWork = new Work(workData);
-    // const userId = 'google-oauth2|100859891013293195235';
     await newWork.save();
     return res.json(newWork);
   } catch (e) {
@@ -50,5 +49,16 @@ router.patch('/:id', checkJwt, async (req, res) => {
     return res.status(422).send(e.message);
   }
 });
+
+router.delete('/:id', checkJwt, async (req, res) => {
+  const { params: { id }} = req;
+  try {
+    const deletedWork = await Work.findByIdAndDelete(id);
+    if (deletedWork) return res.json(deletedWork);
+    return res.status(404).send('No found work with this id');
+  } catch (e) {
+    return res.status(422).send(e.message);
+  }
+})
 
 export default router;
